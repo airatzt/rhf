@@ -5,12 +5,13 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import ProTip from "./ProTip";
 import TextInput from "./TextInput";
+import MyForm from "./MyForm";
 
 export default function App() {
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
-        <TextInput />
+      <MyForm />
       </Box>
     </Container>
   );
