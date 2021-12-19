@@ -8,9 +8,19 @@ export type FieldTextProps = TextInputProps & TextFieldProps;
 
 const TextInput: React.FC<FieldTextProps> = (props) => {
   const { name } = props;
-  const { control } = useFormContext();
-
-  return <Controller render={({ field }) => <TextField {...field} />} control={control} name={name} />;
+  const methods = useFormContext();
+  const { control } = methods;
+  return (
+    <Controller
+      render={({ field, fieldState }) => {
+        //console.log(fieldState);
+        const { error, invalid } = fieldState;
+        return <TextField {...field} name={name} helperText={error && error.message} error={fieldState.invalid} />;
+      }}
+      control={control}
+      name={name}
+    />
+  );
 };
 
 export default TextInput;

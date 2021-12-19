@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@hookform/resolvers": "^2.8.5",
     "@mui/material": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
@@ -12,7 +13,8 @@
     "react-dom": "latest",
     "react-hook-form": "^7.22.2",
     "react-scripts": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
