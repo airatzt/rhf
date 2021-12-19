@@ -7,12 +7,6 @@ import { Button } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const validationSchema = yup
-  .object({
-    name: yup.string().required(),
-  })
-  .required();
-
 type FormValues = {
   firstName: string;
   name: string;
@@ -21,12 +15,29 @@ type FormValues = {
 
 export default function App() {
   const onSubmit = (data: FormValues) => console.log(data);
+  const fieldsCount = 100;
+  const items = [];
+  for (let index = 0; index < fieldsCount; index++) {
+    items.push(<TextInput name={"name" + index} id={"name" + index} />);
+  }
+  let generatedSchema = items.reduce((a, v, i) => ({ ...a, ["name" + i]: yup.string().required() }), {});
+  const validationSchema = yup
+    .object({
+      name: yup.string().required(),
+      ...generatedSchema,
+    })
+    .required();
+
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
+        <p>Fielfd count: {fieldsCount}</p>
         <Form<FormValues> onSubmit={onSubmit} validationSchema={validationSchema}>
-          <TextInput name="name" />
           <Button type="submit">Submit</Button>
+          <br />
+          <TextInput name="name" id="name" />
+
+          {items}
         </Form>
       </Box>
     </Container>
