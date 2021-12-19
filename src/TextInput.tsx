@@ -1,18 +1,16 @@
 import { TextField, TextFieldProps } from "@mui/material";
 import React from "react";
-import { Control, Controller, FieldValues, UseControllerProps, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 interface TextInputProps {
   name: string;
-  control: Control<FieldValues, object>
 }
 export type FieldTextProps = TextInputProps & TextFieldProps;
 
 const TextInput: React.FC<FieldTextProps> = (props) => {
- const { control, name } = props;
+  const { name } = props;
+  const { control } = useFormContext();
 
-  return (
-    <Controller render={({ field }) => <TextField {...field}/>}  control={control}  name={name}/>
-  );
+  return <Controller render={({ field }) => <TextField {...field} />} control={control} name={name} />;
 };
 
 export default TextInput;

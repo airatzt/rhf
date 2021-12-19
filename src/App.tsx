@@ -1,17 +1,25 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
-import ProTip from "./ProTip";
 import TextInput from "./TextInput";
-import MyForm from "./MyForm";
+import { Form } from "./Form";
+import { Button } from "@mui/material";
+
+type FormValues = {
+  firstName: string;
+  name: string;
+  sex: string;
+};
 
 export default function App() {
+  const onSubmit = (data: FormValues) => console.log(data);
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
-      <MyForm />
+        <Form<FormValues> onSubmit={onSubmit}>
+          <TextInput name="name" />
+          <Button type="submit">Submit</Button>
+        </Form>
       </Box>
     </Container>
   );
