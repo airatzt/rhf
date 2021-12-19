@@ -1,19 +1,22 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
-import { FormProvider,  SubmitHandler, useForm } from "react-hook-form";
+import { DeepPartial, FormProvider,  SubmitHandler, UnpackNestedValue, useForm } from "react-hook-form";
 type FormProps<TFormValues> = {
   onSubmit: SubmitHandler<TFormValues>;
   children: React.ReactNode;
   validationSchema: any;
+  defaultValues?: UnpackNestedValue<DeepPartial<TFormValues>>
 };
 
 export const Form = <TFormValues extends Record<string, any> = Record<string, any>>({
   onSubmit,
   children,
   validationSchema,
+  defaultValues
 }: FormProps<TFormValues>) => {
   const methods = useForm<TFormValues>({
     resolver: yupResolver(validationSchema),
+    defaultValues: defaultValues
   });
   return (
     <FormProvider {...methods}>
